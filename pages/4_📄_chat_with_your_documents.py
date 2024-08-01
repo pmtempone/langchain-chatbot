@@ -10,6 +10,9 @@ from langchain_community.vectorstores import DocArrayInMemorySearch
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
 
+# Inicializar `st.session_state.messages` si no existe
+if 'messages' not in st.session_state:
+    st.session_state['messages'] = [{"role": "assistant", "content": "How can I help you?"}]
 
 st.set_page_config(page_title="ChatPDF", page_icon="📄")
 st.header('Chat with your documents (Basic RAG)')

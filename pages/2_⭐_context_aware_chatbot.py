@@ -5,6 +5,10 @@ from streaming import StreamHandler
 from langchain.chains import ConversationChain
 from langchain.memory import ConversationBufferMemory
 
+# Inicializar `st.session_state.messages` si no existe
+if 'messages' not in st.session_state:
+    st.session_state['messages'] = [{"role": "assistant", "content": "How can I help you?"}]
+
 st.set_page_config(page_title="Context aware chatbot", page_icon="⭐")
 st.header('Context aware chatbot')
 st.write('Enhancing Chatbot Interactions through Context Awareness')

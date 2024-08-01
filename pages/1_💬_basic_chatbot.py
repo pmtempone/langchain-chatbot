@@ -1,8 +1,11 @@
 import utils
 import streamlit as st
 from streaming import StreamHandler
-
 from langchain.chains import ConversationChain
+
+# Inicializar `st.session_state.messages` si no existe
+if 'messages' not in st.session_state:
+    st.session_state['messages'] = [{"role": "assistant", "content": "How can I help you?"}]
 
 st.set_page_config(page_title="Chatbot", page_icon="💬")
 st.header('Basic Chatbot')
@@ -28,7 +31,7 @@ class BasicChatbot:
             with st.chat_message("assistant"):
                 st_cb = StreamHandler(st.empty())
                 result = chain.invoke(
-                    {"input":user_query},
+                    {"input": user_query},
                     {"callbacks": [st_cb]}
                 )
                 response = result["response"]
